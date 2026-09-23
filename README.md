@@ -1,6 +1,9 @@
 # 📚 Library Management System (Web & Desktop Edition)
 
-A modern, full-featured **Library Management System** with role-based authentication, real-time book catalog management, search & filtering, borrowing workflows, analytics metrics, and single-click **Vercel** deployment readiness via GitHub.
+A modern, full-featured **Library Management System** with role-based authentication, real-time book catalog management, search & filtering, borrowing workflows, analytics metrics, and live cloud deployment on Vercel.
+
+🌐 **Live Web Application**: [https://library-management-system-indol-nine.vercel.app](https://library-management-system-indol-nine.vercel.app)  
+🐙 **GitHub Repository**: [https://github.com/swamy-code/Library-Management-System](https://github.com/swamy-code/Library-Management-System)
 
 ---
 
@@ -69,13 +72,13 @@ git init
 git add .
 git commit -m "Initial commit of Library Management System"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/library-management-system.git
+git remote add origin https://github.com/swamy-code/Library-Management-System.git
 git push -u origin main
 ```
 
 ### Step 2: Import & Deploy on Vercel
 1. Go to **[vercel.com/new](https://vercel.com/new)** and sign in with your GitHub account.
-2. Under **Import Git Repository**, select your `library-management-system` repository.
+2. Under **Import Git Repository**, select your `swamy-code/Library-Management-System` repository.
 3. Click **Deploy**. Vercel will automatically host your web app live!
 
 ---
