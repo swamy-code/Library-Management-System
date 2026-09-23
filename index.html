@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System | Cloud Portal</title>
+  <meta name="description" content="Modern, fast, and feature-rich Library Management System web application with authentication ready for deployment.">
+  <link rel="stylesheet" href="styles.css">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Fullscreen Auth Screen (Login / Sign In / Sign Up) -->
+  <div id="auth-screen" class="auth-overlay active">
+    <div class="auth-card glass-panel">
+      <div class="auth-brand">
+        <div class="brand-icon">
+          <i class="fa-solid fa-book-bookmark"></i>
+        </div>
+        <h2>Library Cloud Portal</h2>
+        <p>Sign in to manage or borrow library resources</p>
+      </div>
+
+      <!-- Auth Tabs -->
+      <div class="auth-tabs">
+        <button id="auth-tab-signin" class="auth-tab-btn active">Sign In</button>
+        <button id="auth-tab-signup" class="auth-tab-btn">Sign Up</button>
+      </div>
+
+      <!-- Sign In Form -->
+      <form id="signin-form" class="auth-form active">
+        <div class="form-group">
+          <label><i class="fa-solid fa-user-shield"></i> Select Role</label>
+          <div class="role-selector">
+            <label class="role-option">
+              <input type="radio" name="signin-role" value="ADMIN" checked>
+              <span class="role-box admin"><i class="fa-solid fa-shield-halved"></i> Admin</span>
+            </label>
+            <label class="role-option">
+              <input type="radio" name="signin-role" value="USER">
+              <span class="role-box user"><i class="fa-solid fa-user-graduate"></i> User / Student</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="signin-username">Username</label>
+          <input type="text" id="signin-username" placeholder="Enter your username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="signin-password">Password</label>
+          <input type="password" id="signin-password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          <i class="fa-solid fa-right-to-bracket"></i> Sign In
+        </button>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form id="signup-form" class="auth-form">
+        <div class="form-group">
+          <label><i class="fa-solid fa-user-plus"></i> Register Role</label>
+          <div class="role-selector">
+            <label class="role-option">
+              <input type="radio" name="signup-role" value="USER" checked>
+              <span class="role-box user"><i class="fa-solid fa-user-graduate"></i> User / Student</span>
+            </label>
+            <label class="role-option">
+              <input type="radio" name="signup-role" value="ADMIN">
+              <span class="role-box admin"><i class="fa-solid fa-shield-halved"></i> Admin</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="signup-username">New Username</label>
+          <input type="text" id="signup-username" placeholder="Choose a username" required>
+        </div>
+
+        <div class="form-group">
+          <label for="signup-password">New Password</label>
+          <input type="password" id="signup-password" placeholder="Choose a password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          <i class="fa-solid fa-user-check"></i> Create Account
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <a href="#" class="brand">
+      <div class="brand-icon">
+        <i class="fa-solid fa-book-bookmark"></i>
+      </div>
+      <span class="brand-title">LMS Cloud</span>
+    </a>
+
+    <div class="nav-controls">
+      <div class="user-badge">
+        <i class="fa-solid fa-user-circle"></i>
+        <span id="current-username">Guest</span>
+        <span id="current-role-badge" class="role-pill admin">ADMIN</span>
+      </div>
+
+      <button id="add-book-header-btn" class="btn btn-primary btn-sm">
+        <i class="fa-solid fa-plus"></i> Add Book
+      </button>
+
+      <button id="logout-btn" class="btn btn-secondary btn-sm" title="Log Out">
+        <i class="fa-solid fa-right-from-bracket"></i> Logout
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Application Container -->
+  <main class="app-container">
+
+    <!-- Dashboard Statistics -->
+    <section class="stats-grid">
+      <div class="stat-card glass-panel">
+        <div class="stat-icon books">
+          <i class="fa-solid fa-books"></i>
+        </div>
+        <div class="stat-info">
+          <div id="stat-total-books" class="stat-value">0</div>
+          <div class="stat-label">Total Books</div>
+        </div>
+      </div>
+
+      <div class="stat-card glass-panel">
+        <div class="stat-icon available">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div class="stat-info">
+          <div id="stat-available-books" class="stat-value">0</div>
+          <div class="stat-label">Available Books</div>
+        </div>
+      </div>
+
+      <div class="stat-card glass-panel">
+        <div class="stat-icon issued">
+          <i class="fa-solid fa-hand-holding-hand"></i>
+        </div>
+        <div class="stat-info">
+          <div id="stat-issued-books" class="stat-value">0</div>
+          <div class="stat-label">Issued / Borrowed</div>
+        </div>
+      </div>
+
+      <div class="stat-card glass-panel">
+        <div class="stat-icon users">
+          <i class="fa-solid fa-users"></i>
+        </div>
+        <div class="stat-info">
+          <div id="stat-total-users" class="stat-value">2</div>
+          <div class="stat-label">Registered Members</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toolbar & Filters -->
+    <section class="controls-bar glass-panel">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="search-input" placeholder="Search by title, author, or ISBN...">
+      </div>
+
+      <div class="filter-tabs">
+        <button class="tab-btn active" data-filter="all">All Books</button>
+        <button class="tab-btn" data-filter="AVAILABLE">Available</button>
+        <button class="tab-btn" data-filter="ISSUED">Borrowed</button>
+        <button class="tab-btn" data-filter="my-borrowed" id="my-borrowed-tab" style="display: none;">My Borrowed</button>
+      </div>
+    </section>
+
+    <!-- Books Catalog Grid -->
+    <section id="book-grid" class="book-grid">
+      <!-- Dynamic Book Cards Injected Here -->
+    </section>
+
+  </main>
+
+  <!-- Modal: Add / Edit Book -->
+  <div id="book-modal" class="modal-backdrop">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <h3 id="modal-title" class="modal-title">Add New Book</h3>
+        <button id="close-modal-btn" class="close-btn">&times;</button>
+      </div>
+      <form id="book-form">
+        <input type="hidden" id="book-id">
+        <div class="form-group">
+          <label for="book-title-input">Book Title</label>
+          <input type="text" id="book-title-input" required placeholder="e.g. Clean Code">
+        </div>
+        <div class="form-group">
+          <label for="book-author-input">Author</label>
+          <input type="text" id="book-author-input" required placeholder="e.g. Robert C. Martin">
+        </div>
+        <div class="form-group">
+          <label for="book-isbn-input">ISBN</label>
+          <input type="text" id="book-isbn-input" required placeholder="e.g. 9780132350884">
+        </div>
+        <div class="form-group">
+          <label for="book-category-input">Category</label>
+          <select id="book-category-input">
+            <option value="Technology">Technology</option>
+            <option value="Software Engineering">Software Engineering</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="General">General</option>
+          </select>
+        </div>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+          <button type="button" id="cancel-modal-btn" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="flex: 1;">Save Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

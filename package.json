@@ -1,0 +1,18 @@
+{
+  "name": "library-management-system",
+  "version": "1.0.0",
+  "description": "Library Management System Web & Desktop Application",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server .",
+    "dev": "npx http-server ."
+  },
+  "keywords": [
+    "library",
+    "management",
+    "system",
+    "vercel"
+  ],
+  "author": "",
+  "license": "MIT"
+}
